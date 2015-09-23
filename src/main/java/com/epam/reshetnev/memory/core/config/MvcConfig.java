@@ -25,7 +25,8 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 
         registry.addResourceHandler("/docs/**").addResourceLocations("/docs/");
         registry.addResourceHandler("/memo/**").addResourceLocations("/memo/");
-        registry.addResourceHandler("/ngbp/**").addResourceLocations("/ngbp/");
+        registry.addResourceHandler("/build/**").addResourceLocations("/build/"); //dev
+        registry.addResourceHandler("/bin/**").addResourceLocations("/bin/"); //prod
     }
 
 }

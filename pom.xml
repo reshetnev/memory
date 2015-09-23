@@ -201,7 +201,7 @@
               <arguments>
                 <argument>install</argument>
               </arguments>
-              <workingDirectory>${basedir}/src/main/webapp/ngbp</workingDirectory>
+              <workingDirectory>${basedir}/src/main/webapp</workingDirectory>
             </configuration>
             <goals>
               <goal>exec</goal>
@@ -215,7 +215,7 @@
               <arguments>
                 <argument>install</argument>
               </arguments>
-              <workingDirectory>${basedir}/src/main/webapp/ngbp</workingDirectory>
+              <workingDirectory>${basedir}/src/main/webapp</workingDirectory>
             </configuration>
             <goals>
               <goal>exec</goal>
@@ -226,7 +226,7 @@
             <phase>process-resources</phase>
             <configuration>
               <executable>grunt</executable>
-              <workingDirectory>${basedir}/src/main/webapp/ngbp</workingDirectory>
+              <workingDirectory>${basedir}/src/main/webapp</workingDirectory>
             </configuration>
             <goals>
               <goal>exec</goal>
