@@ -19,7 +19,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableTransactionManagement
-@ComponentScan("com.epam.reshetnev.memory.core.repository")
+@ComponentScan("com.epam.reshetnev.memory.core.repository.config")
 @PropertySource("classpath:app.properties")
 @EnableJpaRepositories("com.epam.reshetnev.memory.core.repository")
 public class DataConfig {
@@ -38,8 +38,8 @@ public class DataConfig {
 
     @Bean
     public DataSource dataSource() {
-        DriverManagerDataSource dataSource = new DriverManagerDataSource();
 
+        DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName(env.getRequiredProperty(PROP_DATABASE_DRIVER));
         dataSource.setUrl(env.getRequiredProperty(PROP_DATABASE_URL));
         dataSource.setUsername(env.getRequiredProperty(PROP_DATABASE_USERNAME));
@@ -50,11 +50,11 @@ public class DataConfig {
 
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
+
         LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
         entityManagerFactoryBean.setDataSource(dataSource());
         entityManagerFactoryBean.setPersistenceProviderClass(HibernatePersistenceProvider.class);
         entityManagerFactoryBean.setPackagesToScan(env.getRequiredProperty(PROP_ENTITYMANAGER_PACKAGES_TO_SCAN));
-
         entityManagerFactoryBean.setJpaProperties(getHibernateProperties());
 
         return entityManagerFactoryBean;
@@ -62,6 +62,7 @@ public class DataConfig {
 
     @Bean
     public JpaTransactionManager transactionManager() {
+
         JpaTransactionManager transactionManager = new JpaTransactionManager();
         transactionManager.setEntityManagerFactory(entityManagerFactory().getObject());
 
@@ -69,6 +70,7 @@ public class DataConfig {
     }
 
     private Properties getHibernateProperties() {
+
         Properties properties = new Properties();
         properties.put(PROP_HIBERNATE_DIALECT, env.getRequiredProperty(PROP_HIBERNATE_DIALECT));
         properties.put(PROP_HIBERNATE_SHOW_SQL, env.getRequiredProperty(PROP_HIBERNATE_SHOW_SQL));

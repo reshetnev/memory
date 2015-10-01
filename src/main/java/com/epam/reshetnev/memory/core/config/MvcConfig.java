@@ -2,6 +2,7 @@ package com.epam.reshetnev.memory.core.config;
 
 import java.util.List;
 
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
@@ -12,6 +13,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 @Configuration
 @EnableWebMvc
+@ComponentScan("com.epam.reshetnev.memory.core.config")
 public class MvcConfig extends WebMvcConfigurerAdapter {
 
     @Override
@@ -24,12 +26,12 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
 
-        registry.addResourceHandler("/docs/**").addResourceLocations("/docs/");
-        registry.addResourceHandler("/memo/**").addResourceLocations("/memo/");
+        registry.addResourceHandler("/docs/**").addResourceLocations("/docs/"); //dev
+        registry.addResourceHandler("/memo/**").addResourceLocations("/memo/"); //dev
         registry.addResourceHandler("/build/**").addResourceLocations("/build/"); //dev
-//        registry.addResourceHandler("/bin/**").addResourceLocations("/bin/"); //prod
-        registry.addResourceHandler("/*.html").addResourceLocations("/bin/");
-        registry.addResourceHandler("/assets/**").addResourceLocations("/bin/assets/");
+
+        registry.addResourceHandler("/*.html").addResourceLocations("/bin/"); //prod
+        registry.addResourceHandler("/assets/**").addResourceLocations("/bin/assets/"); //prod
     }
 
     @Override
