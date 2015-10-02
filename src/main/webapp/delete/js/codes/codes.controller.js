@@ -15,5 +15,37 @@ codes = [
 	{ 																														
 		"name":"mts", 	
 		"password":"5678"			
-	}																														
+	},
+	{ 																														
+		"name":"velcom", 	
+		"password":"1234"			
+	}, 	
+	{ 																														
+		"name":"velcom", 	
+		"password":"1234"			
+	}, 	
+	{ 																														
+		"name":"velcom", 	
+		"password":"1234"			
+	}, 	
+	{ 																														
+		"name":"velcom", 	
+		"password":"1234"			
+	}, 	
+	{ 																														
+		"name":"velcom", 	
+		"password":"1234"			
+	}, 	
+	{ 																														
+		"name":"velcom", 	
+		"password":"3333"			
+	},
+	{ 																														
+		"name":"velcom", 	
+		"password":"2222"			
+	}, 	
+	{ 																														
+		"name":"velcom", 	
+		"password":"1111"			
+	} 		
 ]
