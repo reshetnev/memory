@@ -1,0 +1,10 @@
+codes = [																													
+	{ 																														
+		"name":"velcom", 	
+		"password":"1234"			
+	}, 																														
+	{ 																														
+		"name":"mts", 	
+		"password":"5678"			
+	}																														
+]																															
