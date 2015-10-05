@@ -1,51 +1,52 @@
-angular
-	.module('app')
-	.controller('codesCtrl', codesCtrl);
-	
-function codesCtrl() {
-	var vm = this;
-	vm.codesList = codes;
-}
+    angular
+        .module('app.controllers')
+        .controller('codesCtrl', codesCtrl);
 
-codes = [																													
-	{ 																														
-		"name":"velcom", 	
-		"password":"1234"			
-	}, 																														
-	{ 																														
-		"name":"mts", 	
-		"password":"5678"			
-	},
-	{ 																														
-		"name":"velcom", 	
-		"password":"1234"			
-	}, 	
-	{ 																														
-		"name":"velcom", 	
-		"password":"1234"			
-	}, 	
-	{ 																														
-		"name":"velcom", 	
-		"password":"1234"			
-	}, 	
-	{ 																														
-		"name":"velcom", 	
-		"password":"1234"			
-	}, 	
-	{ 																														
-		"name":"velcom", 	
-		"password":"1234"			
-	}, 	
-	{ 																														
-		"name":"velcom", 	
-		"password":"3333"			
-	},
-	{ 																														
-		"name":"velcom", 	
-		"password":"2222"			
-	}, 	
-	{ 																														
-		"name":"velcom", 	
-		"password":"1111"			
-	} 		
-]
+    function codesCtrl() {
+        var vm = this;
+        vm.codesList = codes;
+    }
+
+    codes = [
+             {
+                 "name":"velcom",
+                 "password":"1234"
+             },
+             {
+                 "name":"mts",
+                 "password":"5678"
+             },
+             {
+                 "name":"velcom",
+                 "password":"1234"
+             },
+             {
+                 "name":"velcom",
+                 "password":"1234"
+             },
+             {
+                 "name":"velcom",
+                 "password":"1234"
+             },
+             {
+                 "name":"velcom",
+                 "password":"1234"
+             },
+             {
+                 "name":"velcom",
+                 "password":"1234"
+             },
+             {
+                 "name":"mts",
+                 "password":"3333"
+             },
+             {
+                 "name":"mts",
+                 "password":"2222"
+             },
+             {
+                 "name":"mts",
+                 "password":"1111"
+             }
+         ]
+
