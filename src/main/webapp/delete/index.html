@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html ng-app="app">
     <head>
+        <meta charset="utf-8">
         <title>CodeMemo</title>
         <link rel="stylesheet" type="text/css" href="css/main.css"/>
     </head>
     <body ng-controller="codesCtrl as codes">
-        <header></header>
         <div class="container">
+          <div class="main">
+            <header></header>
             <nav>
                 <div>
                     <a class="btn btn-default btn-lg active">Home</a>
@@ -23,8 +25,8 @@
                         <h1>Result:</h1>
                         <hr></hr>
                         <div ng-repeat="code in codes.codesList | filter:codes.searchText">
-                            <div ng-bind-html="code.name | highlightFilter:codes.searchText"><!--Name={{code.name}}--></div>
-                            <div>Password = {{code.password}}</div>
+                            <div ng-bind-html="code.name | highlightFilter:codes.searchText"><!--{{code.name}}--></div>
+                            <div>{{code.password}}</div>
                             <hr></hr>
                         </div>
                     </div>
@@ -39,10 +41,12 @@
                     </aside>
                 </div>
             </div>
+          </div>
         </div>
         <footer></footer>
         <script src="bower_components/angular/angular.js"></script>
-        <script src="js/app.js"></script>		
+        <script src="js/app.js"></script>
+        <script src="js/filters.js"></script>
         <script src="js/codes/codes.controller.js"></script>
     </body>
 </html>
