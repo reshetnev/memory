@@ -1,51 +1,31 @@
 angular
-	.module('app')
-	.controller('codesCtrl', codesCtrl);
-	
+    .module('app.controllers')
+    .controller('codesCtrl', codesCtrl);
+
 function codesCtrl() {
-	var vm = this;
-	vm.codesList = codes;
+
+    this.codesList = codes;
 }
 
-codes = [																													
-	{ 																														
-		"name":"velcom", 	
-		"password":"1234"			
-	}, 																														
-	{ 																														
-		"name":"mts", 	
-		"password":"5678"			
-	},
-	{ 																														
-		"name":"velcom", 	
-		"password":"1234"			
-	}, 	
-	{ 																														
-		"name":"velcom", 	
-		"password":"1234"			
-	}, 	
-	{ 																														
-		"name":"velcom", 	
-		"password":"1234"			
-	}, 	
-	{ 																														
-		"name":"velcom", 	
-		"password":"1234"			
-	}, 	
-	{ 																														
-		"name":"velcom", 	
-		"password":"1234"			
-	}, 	
-	{ 																														
-		"name":"velcom", 	
-		"password":"3333"			
-	},
-	{ 																														
-		"name":"velcom", 	
-		"password":"2222"			
-	}, 	
-	{ 																														
-		"name":"velcom", 	
-		"password":"1111"			
-	} 		
-]
+codes = [
+         {
+             "name": "mts",
+             "password": "1234"
+           },
+           {
+             "name": "velcom",
+             "password": "5678"
+           },
+           {
+             "name": "eight",
+             "password": "eightPSW"
+           },
+           {
+             "name": "nine",
+             "password": "ninePSW"
+           },
+           {
+             "name": "ten",
+             "password": "tenPSW"
+           }
+         ]

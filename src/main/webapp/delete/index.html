@@ -1,32 +1,52 @@
 <!DOCTYPE html>
 <html ng-app="app">
-	<head>
-		<title>CodeMemo</title>
-		<link rel="stylesheet" type="text/css" href="css/main.css" />
-	</head>
-	<body ng-controller="codesCtrl as codes">
-		<header></header>
-		<div class="container">
-			<nav>
-				<div class="btn-group">
-					<button type="button" class="btn btn-default active">Mobile phone</button>
-					<button type="button" class="btn btn-default">Bank</button>
-					<button type="button" class="btn btn-default">Email</button>
-					<button type="button" class="btn btn-default">Skype</button>
-					<button type="button" class="btn btn-default">Facebook</button>
-				</div>
-			</nav>
-			<section>
-				<div ng-repeat="code in codes.codesList">
-					<div>Name = {{code.name}}</div>
-					<div>Password = {{code.password}}</div>
-					<hr></hr>
-				</div>
-			</section>
-		</div>
-		<footer></footer>
-		<script src="bower_components/angular/angular.js"></script>
-		<script src="js/app.js"></script>		
-		<script src="js/codes/codes.controller.js"></script>
-	</body>
+    <head>
+        <meta charset="utf-8">
+        <title>CodeMemo</title>
+        <link rel="stylesheet" type="text/css" href="css/main.css"/>
+    </head>
+    <body ng-controller="codesCtrl as codes">
+        <div class="container">
+          <div class="main">
+            <header></header>
+            <nav>
+                <div>
+                    <a class="btn btn-default btn-lg active">Home</a>
+                    <a class="btn btn-default btn-lg">Login</a>
+                    <a class="btn btn-default btn-lg">About</a>
+                </div>
+            </nav>
+            <div class="searcher">
+                <input type="text" class="form-control input-lg" placeholder="Search..." ng-model="codes.searchText"/>
+            </div>
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="content">
+                        <h1>Result:</h1>
+                        <hr></hr>
+                        <div ng-repeat="code in codes.codesList | filter:codes.searchText">
+                            <div ng-bind-html="code.name | highlightFilter:codes.searchText"><!--{{code.name}}--></div>
+                            <div>{{code.password}}</div>
+                            <hr></hr>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <aside>
+                        <a class="btn btn-default btn-lg btn-block active">Mobile phone</a>
+                        <a class="btn btn-default btn-lg btn-block">Bank</a>
+                        <a class="btn btn-default btn-lg btn-block">Email</a>
+                        <a class="btn btn-default btn-lg btn-block">Skype</a>
+                        <a class="btn btn-default btn-lg btn-block">Facebook</a>
+                    </aside>
+                </div>
+            </div>
+          </div>
+        </div>
+        <footer></footer>
+        <script src="bower_components/angular/angular.js"></script>
+        <script src="js/app.js"></script>
+        <script src="js/filters.js"></script>
+        <script src="js/codes/codes.controller.js"></script>
+    </body>
 </html>
