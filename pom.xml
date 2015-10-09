@@ -219,6 +219,9 @@
             <phase>process-resources</phase>
             <configuration>
               <executable>grunt</executable>
+              <arguments>  <!-- delete for prod -->
+                <argument>build</argument>  <!-- delete for prod -->
+              </arguments>  <!-- delete for prod -->
               <workingDirectory>${basedir}/src/main/webapp</workingDirectory>
             </configuration>
             <goals>

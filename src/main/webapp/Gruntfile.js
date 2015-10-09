@@ -461,11 +461,15 @@ module.exports = function ( grunt ) {
        * When our JavaScript source files change, we want to run lint them and
        * run our unit tests.
        */
+      //commented karma tests
       jssrc: {
         files: [ 
           '<%= app_files.js %>'
         ],
-        tasks: [ 'jshint:src', 'karma:unit:run', 'copy:build_appjs' ]
+        tasks: [ 'jshint:src',
+//                 'karma:unit:run',
+                 'copy:build_appjs'
+        ]
       },
 
       /**
@@ -556,8 +560,11 @@ module.exports = function ( grunt ) {
    * `delta`) and then add a new task called `watch` that does a clean build
    * before watching for changes.
    */
+  //commented karma tests
   grunt.renameTask( 'watch', 'delta' );
-  grunt.registerTask( 'watch', [ 'build', 'karma:unit', 'delta' ] );
+  grunt.registerTask( 'watch', [ 'build', 
+//    'karma:unit',
+    'delta' ] );
 
   /**
    * The default task is to build and compile.
@@ -571,9 +578,8 @@ module.exports = function ( grunt ) {
   grunt.registerTask( 'build', [
     'clean', 'html2js', 'jshint', 'coffeelint', 'coffee', 'less:build',
     'concat:build_css', 'copy:build_app_assets', 'copy:build_vendor_assets',
-    'copy:build_appjs', 'copy:build_vendorjs', 'copy:build_vendorcss', 'index:build', 'karmaconfig'
-//    ,
-//    'karma:continuous' 
+    'copy:build_appjs', 'copy:build_vendorjs', 'copy:build_vendorcss', 'index:build'
+//    , 'karmaconfig', 'karma:continuous'
   ]);
 
   /**

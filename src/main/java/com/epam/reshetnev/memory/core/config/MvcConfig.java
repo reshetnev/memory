@@ -26,17 +26,24 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
 
-        registry.addResourceHandler("/docs/**").addResourceLocations("/docs/"); //dev
-        registry.addResourceHandler("/memo/**").addResourceLocations("/memo/"); //dev
-        registry.addResourceHandler("/build/**").addResourceLocations("/build/"); //dev
+        registry.addResourceHandler("/docs/**").addResourceLocations("/docs/");
 
-        registry.addResourceHandler("/*.html").addResourceLocations("/bin/"); //prod
-        registry.addResourceHandler("/assets/**").addResourceLocations("/bin/assets/"); //prod
+        //dev
+        registry.addResourceHandler("/*.html").addResourceLocations("/build/");
+        registry.addResourceHandler("/assets/**").addResourceLocations("/build/assets/");
+        registry.addResourceHandler("/src/**").addResourceLocations("/build/src/");
+        registry.addResourceHandler("/vendor/**").addResourceLocations("/build/vendor/");
+        registry.addResourceHandler("/templates-app.js").addResourceLocations("/build/");
+        registry.addResourceHandler("/templates-common.js").addResourceLocations("/build/");
+
+//        //prod
+//        registry.addResourceHandler("/*.html").addResourceLocations("/bin/");
+//        registry.addResourceHandler("/assets/**").addResourceLocations("/bin/assets/");
     }
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/").setViewName("forward:/index.html"); //prod
+        registry.addViewController("/").setViewName("forward:/index.html");
     }
 
 }
