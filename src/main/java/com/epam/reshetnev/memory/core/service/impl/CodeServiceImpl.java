@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.epam.reshetnev.memory.core.entity.Code;
 import com.epam.reshetnev.memory.core.repository.CodeRepository;
 import com.epam.reshetnev.memory.core.service.CodeService;
+import com.epam.reshetnev.memory.core.service.CodecService;
 
 @Service
 public class CodeServiceImpl implements CodeService {
@@ -19,17 +20,21 @@ public class CodeServiceImpl implements CodeService {
     @Autowired
     private CodeRepository codeRepository;
 
+    @Autowired
+    private CodecService codecService;
+
     @Override
-    @Transactional
     public List<Code> getAll() {
         return codeRepository.findAll();
     }
 
     @Override
     @Transactional
-    public Code add(Code code) {
+    public Code add(Code code) throws Exception {
 
         Code savedCode = codeRepository.save(code);
+
+        codecService.encrypt(savedCode);
 
         LOG.info("New code: [{}] successfully created " + savedCode.toString());
 
@@ -37,30 +42,33 @@ public class CodeServiceImpl implements CodeService {
     }
 
     @Override
-    @Transactional
-    public Code getById(Integer id) {
-        return codeRepository.findOne(id);
+    public Code getById(Integer id) throws Exception {
+
+        Code code = codeRepository.findOne(id);
+
+        codecService.decrypt(code);
+
+        return code;
     }
 
     @Override
-    @Transactional
     public Code getByName(String name) {
         return codeRepository.findByName(name);
     }
 
     @Override
     @Transactional
-    public Code update(Integer id, Code newCode) {
+    public Code update(Integer id, Code newCode) throws Exception {
 
-        Code code = codeRepository.getOne(id);
+        Code code = codeRepository.findOne(id);
         code.setName(newCode.getName());
         code.setPassword(newCode.getPassword());
 
-        Code updatedCode = codeRepository.save(code);
+        codecService.encrypt(code);
 
-        LOG.info("Code: [{}] successfully updated " + updatedCode.toString());
+        LOG.info("Code: [{}] successfully updated " + code.toString());
 
-        return updatedCode;
+        return code;
     }
 
     @Override

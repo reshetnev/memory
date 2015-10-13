@@ -97,7 +97,7 @@ public class CodeResource extends BaseResource {
             @ApiResponse(code = ERROR_503, message = ERROR_503_MESSAGE)})
     public Code updateCode(@PathParam("id") Integer id, Code newCode) throws Exception {
 
-        LOG.info("Updating code: [{}] "+ codeService.getById(id).toString());
+        LOG.info("Updating code with id: [{}] "+ id);
 
         Preconditions.checkNotNull(id, "Code id should not be null");
 

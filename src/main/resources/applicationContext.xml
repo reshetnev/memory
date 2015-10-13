@@ -11,5 +11,7 @@
     <bean id="codeRepository" class="com.epam.reshetnev.memory.core.repository.CodeRepository" />
 
     <bean id="codeService" class="com.epam.reshetnev.memory.core.service.impl.CodeServiceImpl" />
+    
+    <bean id="codecService" class="com.epam.reshetnev.memory.core.service.impl.CodecServiceImpl" />
 
 </beans>
