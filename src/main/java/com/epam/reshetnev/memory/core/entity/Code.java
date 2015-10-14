@@ -9,6 +9,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "code")
+//@Proxy(lazy=false) //for getOne() in service
 public class Code {
 
     @Id

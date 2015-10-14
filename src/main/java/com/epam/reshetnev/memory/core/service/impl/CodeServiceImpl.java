@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.epam.reshetnev.memory.core.entity.Code;
@@ -24,6 +25,7 @@ public class CodeServiceImpl implements CodeService {
     private CodecService codecService;
 
     @Override
+    @Transactional(readOnly = true, propagation=Propagation.SUPPORTS)
     public List<Code> getAll() {
         return codeRepository.findAll();
     }
@@ -42,6 +44,7 @@ public class CodeServiceImpl implements CodeService {
     }
 
     @Override
+    @Transactional(readOnly = true, propagation=Propagation.SUPPORTS)
     public Code getById(Integer id) throws Exception {
 
         Code code = codeRepository.findOne(id);
@@ -52,6 +55,7 @@ public class CodeServiceImpl implements CodeService {
     }
 
     @Override
+    @Transactional(readOnly = true, propagation=Propagation.SUPPORTS)
     public Code getByName(String name) {
         return codeRepository.findByName(name);
     }
