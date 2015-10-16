@@ -1,30 +1,27 @@
 package com.epam.reshetnev.memory.core.entity;
 
 import java.io.Serializable;
+import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
-@Table(name = "code")
-//@Proxy(lazy=false) //proxy off for getOne() in service
-public class Code implements Serializable {
+@Table(name = "`group`")
+public class Group implements Serializable {
 
     /**
      * 
      */
-    private static final long serialVersionUID = 2297523441605301983L;
+    private static final long serialVersionUID = -7546349795613116312L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -34,15 +31,12 @@ public class Code implements Serializable {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "password")
-    private String password;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "group")
+    @JsonManagedReference
+    private Set<Code> codes;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    @JoinColumn(name = "groupId", referencedColumnName="id", nullable = false)
-    @JsonBackReference
-    private Group group;
+    public Group() {
 
-    public Code() {
     }
 
     public Integer getId() {
@@ -61,35 +55,26 @@ public class Code implements Serializable {
         this.name = name;
     }
 
-    public String getPassword() {
-        return password;
+    public Set<Code> getCodes() {
+        return codes;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Group getGroup() {
-        return group;
-    }
-
-    public void setGroup(Group group) {
-        this.group = group;
+    public void setCodes(Set<Code> codes) {
+        this.codes = codes;
     }
 
     @Override
     public String toString() {
-        return "Code [id=" + id + ", name=" + name + ", password=" + password + ", group=" + group + "]";
+        return "Group [id=" + id + ", name=" + name + ", codes=" + codes + "]";
     }
 
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((group == null) ? 0 : group.hashCode());
+        result = prime * result + ((codes == null) ? 0 : codes.hashCode());
         result = prime * result + ((id == null) ? 0 : id.hashCode());
         result = prime * result + ((name == null) ? 0 : name.hashCode());
-        result = prime * result + ((password == null) ? 0 : password.hashCode());
         return result;
     }
 
@@ -101,11 +86,11 @@ public class Code implements Serializable {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        Code other = (Code) obj;
-        if (group == null) {
-            if (other.group != null)
+        Group other = (Group) obj;
+        if (codes == null) {
+            if (other.codes != null)
                 return false;
-        } else if (!group.equals(other.group))
+        } else if (!codes.equals(other.codes))
             return false;
         if (id == null) {
             if (other.id != null)
@@ -116,11 +101,6 @@ public class Code implements Serializable {
             if (other.name != null)
                 return false;
         } else if (!name.equals(other.name))
-            return false;
-        if (password == null) {
-            if (other.password != null)
-                return false;
-        } else if (!password.equals(other.password))
             return false;
         return true;
     }
