@@ -40,6 +40,7 @@
                         <div ng-repeat="code in codes.codesList | filter:codes.searchText">
                             <div ng-bind-html="code.name | highlightFilter:codes.searchText"><!--{{code.name}}--></div>
                             <div>{{code.password}}</div>
+                            <div>{{code.group.name}}</div>
                             <hr></hr>
                         </div>
                     </div>
@@ -57,6 +58,5 @@
           </div>
         </div>
         <footer></footer>
-        <script src="http://localhost:35729/livereload.js"></script>
     </body>
 </html>

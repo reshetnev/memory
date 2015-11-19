@@ -8,13 +8,13 @@ public interface CodeService {
 
     public List<Code> getAll();
 
-    public Code getById(Integer id);
+    public Code getById(Integer id) throws Exception;
 
-    public Code add(Code code);
+    public Code add(Code code) throws Exception;
 
     public Code getByName(String name);
 
-    public Code update(Integer id, Code newCode);
+    public Code update(Integer id, Code newCode) throws Exception;
 
     public void delete(Integer id);
 

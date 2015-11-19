@@ -5,11 +5,7 @@
 	http://www.springframework.org/schema/context
 	http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <context:component-scan base-package="com.epam.reshetnev.memory.core.repository"/>
-    <context:component-scan base-package="com.epam.reshetnev.memory.core.service"/>
-
-    <bean id="codeRepository" class="com.epam.reshetnev.memory.core.repository.CodeRepository" />
-
-    <bean id="codeService" class="com.epam.reshetnev.memory.core.service.impl.CodeServiceImpl" />
+    <context:component-scan base-package="com.epam.reshetnev.memory.core"/>
+    <context:component-scan base-package="com.epam.reshetnev.memory.rest"/>
 
 </beans>
