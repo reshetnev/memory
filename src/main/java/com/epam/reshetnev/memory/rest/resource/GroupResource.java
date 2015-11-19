@@ -15,8 +15,8 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.epam.reshetnev.memory.core.entity.Code;
-import com.epam.reshetnev.memory.core.service.CodeService;
+import com.epam.reshetnev.memory.core.entity.Group;
+import com.epam.reshetnev.memory.core.service.GroupService;
 import com.google.common.base.Preconditions;
 import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
@@ -28,102 +28,100 @@ import com.wordnik.swagger.annotations.ApiResponses;
  */
 
 @Component
-@Path("/v1/codes")
-@Api(value = "/v1/codes", description = "Memory codes")
-public class CodeResource extends BaseResource {
+@Path("/v1/groups")
+@Api(value = "/v1/groups", description = "Memory groups")
+public class GroupResource extends BaseResource {
 
-    private static final Logger LOG = Logger.getLogger(CodeResource.class);
+    private static final Logger LOG = Logger.getLogger(GroupResource.class);
 
     @Autowired
-    private CodeService codeService;
+    private GroupService groupService;
 
     @GET
     @Produces({JSON_UTF_8})
-    @ApiOperation(value = "Get list of codes", notes = "Returns all codes")
+    @ApiOperation(value = "Get list of groups", notes = "Returns all groups")
     @ApiResponses(value = {
             @ApiResponse(code = ERROR_400, message = ERROR_400_MESSAGE),
             @ApiResponse(code = ERROR_404, message = ERROR_404_MESSAGE),
             @ApiResponse(code = ERROR_503, message = ERROR_503_MESSAGE)})
-    public List<Code> getAllCodes() throws Exception {
+    public List<Group> getAllGroups() throws Exception {
 
-        List<Code> codes = codeService.getAll();
+        List<Group> groups = groupService.getAll();
 
-        return codes;
+        return groups;
     }
 
     @GET
     @Path("/{id : (\\d+)}")
     @Produces({JSON_UTF_8})
-    @ApiOperation(value = "Get code by id", notes = "Returns code with given id")
+    @ApiOperation(value = "Get group by id", notes = "Returns group with given id")
     @ApiResponses(value = {
             @ApiResponse(code = ERROR_400, message = ERROR_400_MESSAGE),
             @ApiResponse(code = ERROR_404, message = ERROR_404_MESSAGE),
             @ApiResponse(code = ERROR_503, message = ERROR_503_MESSAGE)})
-    public Code getCodeById(@PathParam("id") Integer id) throws Exception {
+    public Group getGroupById(@PathParam("id") Integer id) throws Exception {
 
-        LOG.info("Getting code by id: [{}] " + id);
+        LOG.info("Getting group by id: [{}] " + id);
 
-        Preconditions.checkNotNull(id, "Code id should not be null");
+        Preconditions.checkNotNull(id, "Group id should not be null");
 
-        Code code = codeService.getById(id);
+        Group group = groupService.getById(id);
 
-        return code;
+        return group;
     }
 
     @POST
     @Produces({JSON_UTF_8})
-    @ApiOperation(value = "Create code", notes = "Returns new code")
+    @ApiOperation(value = "Create group", notes = "Returns new group")
     @ApiResponses(value = {
             @ApiResponse(code = ERROR_400, message = ERROR_400_MESSAGE),
             @ApiResponse(code = ERROR_404, message = ERROR_404_MESSAGE),
             @ApiResponse(code = ERROR_503, message = ERROR_503_MESSAGE)})
-    public Response createCode(Code code) throws Exception {
+    public Response createGroup(Group group) throws Exception {
 
-        LOG.info("Creating code: [{}] " + code.toString());
+        LOG.info("Creating group: [{}] " + group.toString());
 
-        Preconditions.checkNotNull(code.getName(), "codeName should not be null");
-        Preconditions.checkNotNull(code.getPassword(), "codePassword should not be null");
-        Preconditions.checkNotNull(code.getGroup(), "codeGroup should not be null");
+        Preconditions.checkNotNull(group.getName(), "group Name should not be null");
 
-        return Response.ok(codeService.add(code)).build();
+        return Response.ok(groupService.add(group)).build();
     }
 
     @PUT
     @Path("/{id : (\\d+)}")
     @Produces({JSON_UTF_8})
-    @ApiOperation(value = "Update code", notes = "Returns updated code")
+    @ApiOperation(value = "Update group", notes = "Returns updated group")
     @ApiResponses(value = {
             @ApiResponse(code = ERROR_400, message = ERROR_400_MESSAGE),
             @ApiResponse(code = ERROR_404, message = ERROR_404_MESSAGE),
             @ApiResponse(code = ERROR_503, message = ERROR_503_MESSAGE)})
-    public Code updateCode(@PathParam("id") Integer id, Code newCode) throws Exception {
+    public Group updateGroup(@PathParam("id") Integer id, Group newGroup) throws Exception {
 
-        LOG.info("Updating code with id: [{}] "+ id);
+        LOG.info("Updating group with id: [{}] "+ id);
 
-        Preconditions.checkNotNull(id, "Code id should not be null");
+        Preconditions.checkNotNull(id, "Group id should not be null");
 
-        return codeService.update(id, newCode);
+        return groupService.update(id, newGroup);
     }
 
     @DELETE
     @Path("/{id : (\\d+)}")
     @Produces({JSON_UTF_8})
-    @ApiOperation(value = "Delete code", notes = "Returns all codes")
+    @ApiOperation(value = "Delete group", notes = "Returns all groups")
     @ApiResponses(value = {
             @ApiResponse(code = ERROR_400, message = ERROR_400_MESSAGE),
             @ApiResponse(code = ERROR_404, message = ERROR_404_MESSAGE),
             @ApiResponse(code = ERROR_503, message = ERROR_503_MESSAGE)})
-    public List<Code> deleteCode(@PathParam("id") Integer id) {
+    public List<Group> deleteCode(@PathParam("id") Integer id) {
 
-        LOG.info("Deleting code with id: [{}] " + id);
+        LOG.info("Deleting group with id: [{}] " + id);
 
-        Preconditions.checkNotNull(id, "Code id should not be null");
+        Preconditions.checkNotNull(id, "Group id should not be null");
 
-        codeService.delete(id);
+        groupService.delete(id);
 
-        List<Code> codes = codeService.getAll();
+        List<Group> groups = groupService.getAll();
 
-        return codes;
+        return groups;
     }
 
 }

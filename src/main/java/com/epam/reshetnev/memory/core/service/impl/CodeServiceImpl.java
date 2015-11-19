@@ -67,6 +67,7 @@ public class CodeServiceImpl implements CodeService {
         Code code = codeRepository.findOne(id);
         code.setName(newCode.getName());
         code.setPassword(newCode.getPassword());
+        code.setGroup(newCode.getGroup());
 
         codecService.encrypt(code);
 

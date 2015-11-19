@@ -1,10 +1,13 @@
 package com.epam.reshetnev.memory.core.service.impl;
 
+import org.springframework.stereotype.Service;
+
 import com.epam.reshetnev.memory.core.entity.Code;
 import com.epam.reshetnev.memory.core.service.CodecService;
 import com.epam.reshetnev.memory.core.util.CodecUtil;
 import com.epam.reshetnev.memory.core.util.MD5Util;
 
+@Service
 public class CodecServiceImpl implements CodecService {
 
     @Override

@@ -5,12 +5,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.epam.reshetnev.memory.core.entity.Code;
+import com.epam.reshetnev.memory.core.entity.Group;
 
 @Repository
-public interface CodeRepository extends JpaRepository<Code, Integer> {
+public interface GroupRepository extends JpaRepository<Group, Integer> {
 
-    @Query("select code from Code code where code.name = :name")
-    public Code findByName(@Param("name") String name);
+    @Query("select group from Group group where group.name = :name")
+    public Group findByName(@Param("name") String name);
 
 }

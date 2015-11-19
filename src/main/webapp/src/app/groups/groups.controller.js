@@ -3,16 +3,16 @@
 
 angular
     .module('app.controllers')
-    .controller('codesCtrl', ['$http', codesCtrl]);
+    .controller('groupsCtrl', ['$http', groupsCtrl]);
 
-function codesCtrl($http) {
+function groupsCtrl($http) {
 
     /* jshint validthis: true */
     var vm = this;
 
-    $http({method:'GET', url:'http://localhost:7001/memory/api/v1/codes'})
+    $http({method:'GET', url:'http://localhost:7001/memory/api/v1/groups'})
         .success(function (data, status, headers, config) {
-            vm.codesList = data;
+            vm.groupsList = data;
         })
         .error(function (data, status, headers, config) {
             Console.out("REST Error");

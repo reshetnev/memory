@@ -5,14 +5,15 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jersey.repackaged.com.google.common.collect.Sets;
 
 @Entity
 @Table(name = "`group`")
@@ -31,12 +32,11 @@ public class Group implements Serializable {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "group")
-    @JsonManagedReference
-    private Set<Code> codes;
+    @OneToMany(mappedBy = "group")
+    @JsonIgnore
+    private Set<Code> codes = Sets.newHashSet();
 
     public Group() {
-
     }
 
     public Integer getId() {
