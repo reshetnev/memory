@@ -39,8 +39,8 @@
                         <hr></hr>
                         <div ng-repeat="code in codes.codesList | filter:codes.searchText">
                             <div ng-bind-html="code.name | highlightFilter:codes.searchText"><!--{{code.name}}--></div>
-                            <div>{{code.password}}</div>
-                            <div>{{code.group.name}}</div>
+                            <div ng-bind-html="code.password | highlightFilter:codes.searchText"><!--{{code.password}}--></div>
+                            <div ng-bind-html="code.group.name | highlightFilter:codes.searchText"><!--{{code.group.name}}--></div>
                             <hr></hr>
                         </div>
                     </div>
