@@ -15,7 +15,7 @@ function codesCtrl($http) {
             vm.codesList = data;
         })
         .error(function (data, status, headers, config) {
-            Console.out("REST Error");
+            console.log("REST Error for CODES");
         });
 
 }

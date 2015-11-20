@@ -8,13 +8,13 @@ public interface GroupService {
 
     public List<Group> getAll();
 
-    public Group getById(Integer id) throws Exception;
+    public Group getById(Integer id);
 
-    public Group add(Group group) throws Exception;
+    public Group add(Group group);
 
     public Group getByName(String name);
 
-    public Group update(Integer id, Group group) throws Exception;
+    public Group update(Integer id, Group newGroup);
 
     public void delete(Integer id);
 
