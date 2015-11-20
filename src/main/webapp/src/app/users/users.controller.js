@@ -3,19 +3,19 @@
 
 angular
     .module('app.controllers')
-    .controller('groupsCtrl', ['$http', groupsCtrl]);
+    .controller('usersCtrl', ['$http', usersCtrl]);
 
-function groupsCtrl($http) {
+function usersCtrl($http) {
 
     /* jshint validthis: true */
     var vm = this;
 
-    $http({method:'GET', url:'http://localhost:7001/memory/api/v1/groups'})
+    $http({method:'GET', url:'http://localhost:7001/memory/api/v1/users'})
         .success(function (data, status, headers, config) {
-            vm.groupsList = data;
+            vm.usersList = data;
         })
         .error(function (data, status, headers, config) {
-            console.log("REST Error for GROUPS");
+            console.log("REST Error for USERS");
         });
 
 }

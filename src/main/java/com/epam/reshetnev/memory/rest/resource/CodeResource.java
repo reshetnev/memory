@@ -81,9 +81,10 @@ public class CodeResource extends BaseResource {
 
         LOG.info("Creating code: [{}] " + code.toString());
 
-        Preconditions.checkNotNull(code.getName(), "codeName should not be null");
-        Preconditions.checkNotNull(code.getPassword(), "codePassword should not be null");
-        Preconditions.checkNotNull(code.getGroup(), "codeGroup should not be null");
+        Preconditions.checkNotNull(code.getName(), "Code Name should not be null");
+        Preconditions.checkNotNull(code.getPassword(), "Code Password should not be null");
+        Preconditions.checkNotNull(code.getGroup(), "Code Group should not be null");
+        Preconditions.checkNotNull(code.getUser(), "Code User should not be null");
 
         return Response.ok(codeService.add(code)).build();
     }

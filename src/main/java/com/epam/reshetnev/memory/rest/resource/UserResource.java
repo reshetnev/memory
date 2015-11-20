@@ -15,8 +15,8 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.epam.reshetnev.memory.core.entity.Group;
-import com.epam.reshetnev.memory.core.service.GroupService;
+import com.epam.reshetnev.memory.core.entity.User;
+import com.epam.reshetnev.memory.core.service.UserService;
 import com.google.common.base.Preconditions;
 import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
@@ -28,98 +28,100 @@ import com.wordnik.swagger.annotations.ApiResponses;
  */
 
 @Component
-@Path("/v1/groups")
-@Api(value = "/v1/groups", description = "Memory groups")
-public class GroupResource extends BaseResource {
+@Path("/v1/users")
+@Api(value = "/v1/users", description = "Memory users")
+public class UserResource extends BaseResource {
 
-    private static final Logger LOG = Logger.getLogger(GroupResource.class);
+    private static final Logger LOG = Logger.getLogger(UserResource.class);
 
     @Autowired
-    private GroupService groupService;
+    private UserService userService;
 
     @GET
     @Produces({JSON_UTF_8})
-    @ApiOperation(value = "Get list of groups", notes = "Returns all groups")
+    @ApiOperation(value = "Get list of users", notes = "Returns all users")
     @ApiResponses(value = {
             @ApiResponse(code = ERROR_400, message = ERROR_400_MESSAGE),
             @ApiResponse(code = ERROR_404, message = ERROR_404_MESSAGE),
             @ApiResponse(code = ERROR_503, message = ERROR_503_MESSAGE)})
-    public List<Group> getAllGroups() throws Exception {
+    public List<User> getAllUsers() throws Exception {
 
-        List<Group> groups = groupService.getAll();
+        List<User> users = userService.findAll();
 
-        return groups;
+        return users;
     }
 
     @GET
     @Path("/{id : (\\d+)}")
     @Produces({JSON_UTF_8})
-    @ApiOperation(value = "Get group by id", notes = "Returns group with given id")
+    @ApiOperation(value = "Get user by id", notes = "Returns user with given id")
     @ApiResponses(value = {
             @ApiResponse(code = ERROR_400, message = ERROR_400_MESSAGE),
             @ApiResponse(code = ERROR_404, message = ERROR_404_MESSAGE),
             @ApiResponse(code = ERROR_503, message = ERROR_503_MESSAGE)})
-    public Group getGroupById(@PathParam("id") Integer id) throws Exception {
+    public User getUserById(@PathParam("id") Integer id) throws Exception {
 
-        LOG.info("Getting group by id: [{}] " + id);
+        LOG.info("Getting user by id: [{}] " + id);
 
-        Preconditions.checkNotNull(id, "Group id should not be null");
+        Preconditions.checkNotNull(id, "User id should not be null");
 
-        Group group = groupService.getById(id);
+        User user = userService.findById(id);
 
-        return group;
+        return user;
     }
 
     @POST
     @Produces({JSON_UTF_8})
-    @ApiOperation(value = "Create group", notes = "Returns new group")
+    @ApiOperation(value = "Create user", notes = "Returns new user")
     @ApiResponses(value = {
             @ApiResponse(code = ERROR_400, message = ERROR_400_MESSAGE),
             @ApiResponse(code = ERROR_404, message = ERROR_404_MESSAGE),
             @ApiResponse(code = ERROR_503, message = ERROR_503_MESSAGE)})
-    public Response createGroup(Group group) throws Exception {
+    public Response createUser(User user) throws Exception {
 
-        LOG.info("Creating group: [{}] " + group.toString());
+        LOG.info("Creating user: [{}] " + user.toString());
 
-        Preconditions.checkNotNull(group.getName(), "Group Name should not be null");
+        Preconditions.checkNotNull(user.getName(), "User Name should not be null");
+        Preconditions.checkNotNull(user.getEmail(), "User Email should not be null");
+        Preconditions.checkNotNull(user.getPassword(), "User Password should not be null");
 
-        return Response.ok(groupService.add(group)).build();
+        return Response.ok(userService.save(user)).build();
     }
 
     @PUT
     @Path("/{id : (\\d+)}")
     @Produces({JSON_UTF_8})
-    @ApiOperation(value = "Update group", notes = "Returns updated group")
+    @ApiOperation(value = "Update user", notes = "Returns updated user")
     @ApiResponses(value = {
             @ApiResponse(code = ERROR_400, message = ERROR_400_MESSAGE),
             @ApiResponse(code = ERROR_404, message = ERROR_404_MESSAGE),
             @ApiResponse(code = ERROR_503, message = ERROR_503_MESSAGE)})
-    public Group updateGroup(@PathParam("id") Integer id, Group newGroup) throws Exception {
+    public User updateUser(@PathParam("id") Integer id, User newUser) throws Exception {
 
-        LOG.info("Updating group with id: [{}] "+ id);
+        LOG.info("Updating user with id: [{}] "+ id);
 
-        Preconditions.checkNotNull(id, "Group id should not be null");
+        Preconditions.checkNotNull(id, "User id should not be null");
 
-        return groupService.update(id, newGroup);
+        return userService.update(id, newUser);
     }
 
     @DELETE
     @Path("/{id : (\\d+)}")
     @Produces({JSON_UTF_8})
-    @ApiOperation(value = "Delete group", notes = "Returns all groups")
+    @ApiOperation(value = "Delete user", notes = "Returns all users")
     @ApiResponses(value = {
             @ApiResponse(code = ERROR_400, message = ERROR_400_MESSAGE),
             @ApiResponse(code = ERROR_404, message = ERROR_404_MESSAGE),
             @ApiResponse(code = ERROR_503, message = ERROR_503_MESSAGE)})
-    public List<Group> deleteGroup(@PathParam("id") Integer id) {
+    public List<User> deleteUser(@PathParam("id") Integer id) {
 
-        LOG.info("Deleting group with id: [{}] " + id);
+        LOG.info("Deleting user with id: [{}] " + id);
 
-        Preconditions.checkNotNull(id, "Group id should not be null");
+        Preconditions.checkNotNull(id, "User id should not be null");
 
-        groupService.delete(id);
+        userService.delete(id);
 
-        List<Group> groups = groupService.getAll();
+        List<User> groups = userService.findAll();
 
         return groups;
     }

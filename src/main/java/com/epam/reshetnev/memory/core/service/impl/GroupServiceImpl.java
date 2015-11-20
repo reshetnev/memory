@@ -28,7 +28,7 @@ public class GroupServiceImpl implements GroupService {
 
     @Override
     @Transactional
-    public Group add(Group group) throws Exception {
+    public Group add(Group group) {
 
         Group savedGroup = groupRepository.save(group);
 
@@ -39,7 +39,7 @@ public class GroupServiceImpl implements GroupService {
 
     @Override
     @Transactional(readOnly = true, propagation=Propagation.SUPPORTS)
-    public Group getById(Integer id) throws Exception {
+    public Group getById(Integer id) {
 
         Group group = groupRepository.findOne(id);
 
@@ -54,7 +54,7 @@ public class GroupServiceImpl implements GroupService {
 
     @Override
     @Transactional
-    public Group update(Integer id, Group newGroup) throws Exception {
+    public Group update(Integer id, Group newGroup) {
 
         Group group = groupRepository.findOne(id);
         group.setName(newGroup.getName());

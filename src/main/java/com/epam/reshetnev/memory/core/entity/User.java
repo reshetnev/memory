@@ -1,25 +1,28 @@
 package com.epam.reshetnev.memory.core.entity;
 
 import java.io.Serializable;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jersey.repackaged.com.google.common.collect.Sets;
+
 @Entity
-@Table(name = "code")
-//@Proxy(lazy=false) //proxy off for getOne() in service
-public class Code implements Serializable {
+@Table(name = "user")
+public class User implements Serializable {
 
     /**
      * 
      */
-    private static final long serialVersionUID = -5425056411078465657L;
+    private static final long serialVersionUID = 3407850233904896554L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -29,18 +32,17 @@ public class Code implements Serializable {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "email")
+    private String email;
+
     @Column(name = "password")
     private String password;
 
-    @ManyToOne
-    @JoinColumn(name = "groupId", referencedColumnName="id", nullable = false)
-    private Group group;
+    @OneToMany(mappedBy = "user")
+    @JsonIgnore
+    private Set<Code> codes = Sets.newHashSet();
 
-    @ManyToOne
-    @JoinColumn(name = "userId", referencedColumnName="id", nullable = false)
-    private User user;
-
-    public Code() {
+    public User() {
     }
 
     public Integer getId() {
@@ -59,6 +61,14 @@ public class Code implements Serializable {
         this.name = name;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public String getPassword() {
         return password;
     }
@@ -67,25 +77,17 @@ public class Code implements Serializable {
         this.password = password;
     }
 
-    public Group getGroup() {
-        return group;
+    public Set<Code> getCodes() {
+        return codes;
     }
 
-    public void setGroup(Group group) {
-        this.group = group;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
+    public void setCodes(Set<Code> codes) {
+        this.codes = codes;
     }
 
     @Override
     public String toString() {
-        return "Code [id=" + id + ", name=" + name + ", password=" + password + ", group=" + group + ", user=" + user
+        return "User [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + ", codes=" + codes
                 + "]";
     }
 
@@ -93,11 +95,11 @@ public class Code implements Serializable {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((group == null) ? 0 : group.hashCode());
+        result = prime * result + ((codes == null) ? 0 : codes.hashCode());
+        result = prime * result + ((email == null) ? 0 : email.hashCode());
         result = prime * result + ((id == null) ? 0 : id.hashCode());
         result = prime * result + ((name == null) ? 0 : name.hashCode());
         result = prime * result + ((password == null) ? 0 : password.hashCode());
-        result = prime * result + ((user == null) ? 0 : user.hashCode());
         return result;
     }
 
@@ -109,11 +111,16 @@ public class Code implements Serializable {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        Code other = (Code) obj;
-        if (group == null) {
-            if (other.group != null)
+        User other = (User) obj;
+        if (codes == null) {
+            if (other.codes != null)
                 return false;
-        } else if (!group.equals(other.group))
+        } else if (!codes.equals(other.codes))
+            return false;
+        if (email == null) {
+            if (other.email != null)
+                return false;
+        } else if (!email.equals(other.email))
             return false;
         if (id == null) {
             if (other.id != null)
@@ -129,11 +136,6 @@ public class Code implements Serializable {
             if (other.password != null)
                 return false;
         } else if (!password.equals(other.password))
-            return false;
-        if (user == null) {
-            if (other.user != null)
-                return false;
-        } else if (!user.equals(other.user))
             return false;
         return true;
     }
