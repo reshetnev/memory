@@ -98,6 +98,16 @@ module.exports = function ( grunt ) {
      * `build_dir`, and then to copy the assets to `compile_dir`.
      */
     copy: {
+		html_pages: {
+			files: [
+				{
+					src: [ '**' ],
+					dest: '<%= build_dir %>/pages/',
+					cwd: 'src/pages',
+					expand: true
+				}
+			]
+		},
       build_app_assets: {
         files: [
           { 
@@ -148,6 +158,16 @@ module.exports = function ( grunt ) {
             expand: true
           }
         ]
+      },
+      compile_html_pages: {
+          files: [
+              {
+                  src: [ '**' ],
+                  dest: '<%= compile_dir %>/pages/',
+                  cwd: '<%= build_dir %>/pages',
+                  expand: true
+              }
+          ]
       },
       compile_assets: {
         files: [
@@ -578,7 +598,8 @@ module.exports = function ( grunt ) {
   grunt.registerTask( 'build', [
     'clean', 'html2js', 'jshint', 'coffeelint', 'coffee', 'less:build',
     'concat:build_css', 'copy:build_app_assets', 'copy:build_vendor_assets',
-    'copy:build_appjs', 'copy:build_vendorjs', 'copy:build_vendorcss', 'index:build'
+    'copy:build_appjs', 'copy:build_vendorjs', 'copy:build_vendorcss', 'index:build',
+	'copy:html_pages'
 //    , 'karmaconfig', 'karma:continuous'
   ]);
 
@@ -587,7 +608,7 @@ module.exports = function ( grunt ) {
    * minifying your code.
    */
   grunt.registerTask( 'compile', [
-    'less:compile', 'copy:compile_assets', 'ngAnnotate', 'concat:compile_js', 'uglify', 'index:compile'
+    'less:compile', 'copy:compile_assets', 'copy:compile_html_pages', 'ngAnnotate', 'concat:compile_js', 'uglify', 'index:compile'
   ]);
 
   /**

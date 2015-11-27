@@ -26,13 +26,14 @@
                 <div>
                     <a href="#/" class="btn btn-default btn-lg active">Home</a>
                     <a href="#/login" class="btn btn-default btn-lg">Login</a>
-                    <a href="" ng-click="logout()" ng-show="authenticated" class="btn btn-default btn-lg">Logout</a>
-                    <a class="btn btn-default btn-lg">About</a>
+                    <!--a href="" ng-click="logout()" ng-show="authenticated" class="btn btn-default btn-lg">Logout</a-->
+                    <a href="#/about" class="btn btn-default btn-lg">About</a>
                 </div>
             </nav>
             <div class="searcher">
                 <input type="text" class="form-control input-lg" placeholder="Search..." ng-model="codes.searchText"/>
             </div>
+            <div ng-view></div>
             <div class="row">
                 <div class="col-md-8">
                     <div class="content">
@@ -49,11 +50,11 @@
                 </div>
                 <div class="col-md-4">
                     <aside>
-                        <a class="btn btn-default btn-lg btn-block active">Mobile phone</a>
-                        <a class="btn btn-default btn-lg btn-block">Bank</a>
+                        <a class="btn btn-default btn-lg btn-block active">All</a>
+                        <a class="btn btn-default btn-lg btn-block">Mobile phone</a>
+                        <a class="btn btn-default btn-lg btn-block">Bank Cards</a>
                         <a class="btn btn-default btn-lg btn-block">Email</a>
                         <a class="btn btn-default btn-lg btn-block">Skype</a>
-                        <a class="btn btn-default btn-lg btn-block">Facebook</a>
                     </aside>
                 </div>
             </div>
