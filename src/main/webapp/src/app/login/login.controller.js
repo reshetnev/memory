@@ -12,8 +12,7 @@ function loginCtrl($rootScope, $scope, $http, $location) {
 
     var authenticate = function(credentials, callback) {
 
-        var headers = credentials ? {authorization : "Basic "
-            + btoa(credentials.username + ":" + credentials.password)
+        var headers = credentials ? {authorization : "Basic " + btoa(credentials.username + ":" + credentials.password)
         } : {};
 
         $http.get('user', {headers : headers}).success(function(data) {
@@ -27,7 +26,7 @@ function loginCtrl($rootScope, $scope, $http, $location) {
             $rootScope.authenticated = false;
             callback && callback();
           });
-    }
+    };
 
     authenticate();
     $scope.credentials = {};
