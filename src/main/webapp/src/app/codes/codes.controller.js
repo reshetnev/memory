@@ -15,17 +15,19 @@ function codesCtrl($rootScope, $scope, $http, $location) {
         var headers = credentials ? {authorization : "Basic " + btoa(credentials.username + ":" + credentials.password)
         } : {};
 
-        $http.get('user', {headers : headers}).success(function(data) {
+        $http.get('api/user', {headers : headers}).success(function(data) {
+            console.log("User LOGIN: " + data.name);
             if (data.name) {
               $rootScope.authenticated = true;
+              $rootScope.userName = data.name;
             } else {
               $rootScope.authenticated = false;
             }
             callback && callback();
-          }).error(function() {
+        }).error(function() {
             $rootScope.authenticated = false;
             callback && callback();
-          });
+        });
     };
 
     authenticate();
@@ -44,14 +46,16 @@ function codesCtrl($rootScope, $scope, $http, $location) {
 
     $scope.logout = function() {
         $http.post('logout', {}).success(function() {
+          console.log("Logout success");
           $rootScope.authenticated = false;
           $location.path("/");
         }).error(function(data) {
+          console.log("Logout error");
           $rootScope.authenticated = false;
         });
-      };
+    };
 
-    $http({method:'GET', url:'http://localhost:7001/memory/api/v1/codes'})
+    $http({method:'GET', url:'api/v1/codes'})
         .success(function (data, status, headers, config) {
             vm.codesList = data;
         })

@@ -3,14 +3,11 @@
 
 angular
     .module('app.controllers')
-    .controller('homeCtrl', homeCtrl);
+    .controller('homeCtrl', ['$rootScope', homeCtrl]);
 
-function homeCtrl() {
+function homeCtrl($rootScope) {
 
-    /* jshint validthis: true */
-    var vm = this;
-
-    vm.greeting = "Hello, Authenticated User!!!";
+    $rootScope.greeting = "Hello, " + $rootScope.userName;
 
 }
 

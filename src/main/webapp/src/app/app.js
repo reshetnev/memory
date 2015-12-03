@@ -28,10 +28,11 @@
         .when('/login', {
             templateUrl : 'pages/login.html',
             controller : 'codesCtrl'
-        }).otherwise('/');
+        })
+        .otherwise('/');
 
         $httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
 
-    };
+    }
 
 })();

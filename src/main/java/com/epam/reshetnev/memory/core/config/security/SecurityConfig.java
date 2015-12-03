@@ -10,14 +10,16 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
-
+import org.springframework.security.web.csrf.CsrfFilter;
+import org.springframework.security.web.csrf.CsrfTokenRepository;
+import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig extends WebSecurityConfigurerAdapter
-{
-//    @Autowired
-//    private DataSource dataSource;
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
+    // @Autowired
+    // private DataSource dataSource;
 
     @Autowired
     private CustomUserDetailsService customUserDetailsService;
@@ -25,36 +27,28 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
     @Override
     protected void configure(AuthenticationManagerBuilder registry) throws Exception {
         /*
-        registry
-        .inMemoryAuthentication()
-        .withUser("siva")
-          .password("siva")
-          .roles("USER")
-          .and()
-        .withUser("admin")
-          .password("admin")
-          .roles("ADMIN","USER");
-        */
-        
-        //registry.jdbcAuthentication().dataSource(dataSource);
+         * registry .inMemoryAuthentication() .withUser("siva")
+         * .password("siva") .roles("USER") .and() .withUser("admin")
+         * .password("admin") .roles("ADMIN","USER");
+         */
+
+        // registry.jdbcAuthentication().dataSource(dataSource);
         registry.userDetailsService(customUserDetailsService);
     }
 
-
-//      @Override
-//      public void configure(WebSecurity web) throws Exception {
-//        web
-//          .ignoring()
-//             .antMatchers("/resources/**");
-//      }
-
-      @Override
-      protected void configure(HttpSecurity http) throws Exception {
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
         http
-          .httpBasic()
-        .and()
-          .authorizeRequests()
-            .antMatchers("/index.html", "/home.html", "/login.html", "/").permitAll()
-            .anyRequest().authenticated();
-      }
+            .httpBasic()
+            .and().authorizeRequests().antMatchers("/index.html", "/home.html", "/login.html", "/")
+                .permitAll().anyRequest().authenticated()
+            .and().addFilterAfter(new CsrfHeaderFilter(), CsrfFilter.class)
+                .csrf().csrfTokenRepository(csrfTokenRepository());
+    }
+
+    private CsrfTokenRepository csrfTokenRepository() {
+        HttpSessionCsrfTokenRepository repository = new HttpSessionCsrfTokenRepository();
+        repository.setHeaderName("X-XSRF-TOKEN");
+        return repository;
+    }
 }
