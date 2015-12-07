@@ -22,10 +22,10 @@ public class WebAppInitializer implements WebApplicationInitializer {
         webContext.register(MvcConfig.class);
         ServletRegistration.Dynamic dispatcher = servletContext.addServlet("dispatcher",
                 new DispatcherServlet(webContext));
-        servletContext.addFilter("springSecurityFilterChain", new DelegatingFilterProxy("springSecurityFilterChain"))
-                .addMappingForUrlPatterns(null, false, "/*");
         dispatcher.setLoadOnStartup(1);
         dispatcher.addMapping("/");
+        servletContext.addFilter("springSecurityFilterChain", new DelegatingFilterProxy("springSecurityFilterChain"))
+                .addMappingForUrlPatterns(null, false, "/*");
     }
 
 }

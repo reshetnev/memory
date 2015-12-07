@@ -20,3 +20,4 @@
 /.project
 /.settings
 /src/main/webapp/vendor/angular-route
+/src/main/webapp/vendor/angular-resource
