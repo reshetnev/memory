@@ -1,6 +1,7 @@
 package com.epam.reshetnev.memory.core.service.impl;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,8 @@ import com.epam.reshetnev.memory.core.entity.Code;
 import com.epam.reshetnev.memory.core.repository.CodeRepository;
 import com.epam.reshetnev.memory.core.service.CodeService;
 import com.epam.reshetnev.memory.core.service.CodecService;
+
+import jersey.repackaged.com.google.common.collect.Lists;
 
 @Service
 public class CodeServiceImpl implements CodeService {
@@ -26,8 +29,12 @@ public class CodeServiceImpl implements CodeService {
 
     @Override
     @Transactional(readOnly = true, propagation=Propagation.SUPPORTS)
-    public List<Code> getAll() {
-        return codeRepository.findAll();
+    public List<Code> getAll() throws Exception {
+        List<Code> codes = Lists.newArrayList();
+        for (Code code : codeRepository.findAll()) {
+            codes.add(codecService.decrypt(code));
+        }
+        return codes;
     }
 
     @Override
@@ -56,8 +63,8 @@ public class CodeServiceImpl implements CodeService {
 
     @Override
     @Transactional(readOnly = true, propagation=Propagation.SUPPORTS)
-    public Code getByName(String name) {
-        return codeRepository.findByName(name);
+    public Code getByName(String name) throws Exception {
+        return codecService.decrypt(codeRepository.findByName(name));
     }
 
     @Override
