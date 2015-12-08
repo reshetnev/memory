@@ -114,7 +114,7 @@ public class CodeResource extends BaseResource {
             @ApiResponse(code = ERROR_400, message = ERROR_400_MESSAGE),
             @ApiResponse(code = ERROR_404, message = ERROR_404_MESSAGE),
             @ApiResponse(code = ERROR_503, message = ERROR_503_MESSAGE)})
-    public List<Code> deleteCode(@PathParam("id") Integer id) {
+    public List<Code> deleteCode(@PathParam("id") Integer id) throws Exception {
 
         LOG.info("Deleting code with id: [{}] " + id);
 

@@ -30,6 +30,7 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 
         //dev
         registry.addResourceHandler("/*.html").addResourceLocations("/build/");
+        registry.addResourceHandler("/pages/*.html").addResourceLocations("/build/pages/");
         registry.addResourceHandler("/assets/**").addResourceLocations("/build/assets/");
         registry.addResourceHandler("/src/**").addResourceLocations("/build/src/");
         registry.addResourceHandler("/vendor/**").addResourceLocations("/build/vendor/");
@@ -38,6 +39,7 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 
 //        //prod
 //        registry.addResourceHandler("/*.html").addResourceLocations("/bin/");
+//        registry.addResourceHandler("/pages/*.html").addResourceLocations("/build/pages/");
 //        registry.addResourceHandler("/assets/**").addResourceLocations("/bin/assets/");
     }
 

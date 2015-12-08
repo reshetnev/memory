@@ -10,7 +10,7 @@ function usersCtrl($http) {
     /* jshint validthis: true */
     var vm = this;
 
-    $http({method:'GET', url:'http://localhost:7001/memory/api/v1/users'})
+    $http({method:'GET', url:'api/v1/users'})
         .success(function (data, status, headers, config) {
             vm.usersList = data;
         })
