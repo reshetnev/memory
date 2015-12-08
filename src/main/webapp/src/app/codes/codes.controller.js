@@ -15,7 +15,7 @@ function codesCtrl($rootScope, $scope, $http, $location) {
         var headers = credentials ? {authorization : "Basic " + btoa(credentials.username + ":" + credentials.password)
         } : {};
 
-        $http.get('api/user', {headers : headers}).success(function(data) {
+        $http.get('api/v1/users/principal', {headers : headers}).success(function(data) {
             console.log("User LOGIN: " + data.name);
             if (data.name) {
               $rootScope.authenticated = true;
