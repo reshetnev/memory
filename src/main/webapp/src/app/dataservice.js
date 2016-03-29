@@ -10,7 +10,7 @@
     function dataservice($resource) {
 
         var service = {
-            account: account,
+            account: account
         };
 
         return service;

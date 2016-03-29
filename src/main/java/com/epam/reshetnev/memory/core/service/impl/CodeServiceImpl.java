@@ -24,17 +24,13 @@ public class CodeServiceImpl implements CodeService {
     @Autowired
     private CodeRepository codeRepository;
 
-    @Autowired
-    private CodecService codecService;
+//    @Autowired
+//    private CodecService codecService;
 
     @Override
     @Transactional(readOnly = true, propagation=Propagation.SUPPORTS)
     public List<Code> getAll() throws Exception {
-        List<Code> codes = Lists.newArrayList();
-        for (Code code : codeRepository.findAll()) {
-            codes.add(codecService.decrypt(code));
-        }
-        return codes;
+        return codeRepository.findAll();
     }
 
     @Override
@@ -42,8 +38,6 @@ public class CodeServiceImpl implements CodeService {
     public Code add(Code code) throws Exception {
 
         Code savedCode = codeRepository.save(code);
-
-        codecService.encrypt(savedCode);
 
         LOG.info("New code: [{}] successfully created " + savedCode.toString());
 
@@ -56,15 +50,13 @@ public class CodeServiceImpl implements CodeService {
 
         Code code = codeRepository.findOne(id);
 
-        codecService.decrypt(code);
-
         return code;
     }
 
     @Override
     @Transactional(readOnly = true, propagation=Propagation.SUPPORTS)
     public Code getByName(String name) throws Exception {
-        return codecService.decrypt(codeRepository.findByName(name));
+        return codeRepository.findByName(name);
     }
 
     @Override
@@ -75,8 +67,6 @@ public class CodeServiceImpl implements CodeService {
         code.setName(newCode.getName());
         code.setPassword(newCode.getPassword());
         code.setGroup(newCode.getGroup());
-
-        codecService.encrypt(code);
 
         LOG.info("Code: [{}] successfully updated " + code.toString());
 
