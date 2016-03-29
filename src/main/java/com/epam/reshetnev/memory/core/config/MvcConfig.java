@@ -28,19 +28,11 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 
         registry.addResourceHandler("/docs/**").addResourceLocations("/docs/");
 
-        //dev
-        registry.addResourceHandler("/*.html").addResourceLocations("/build/");
-        registry.addResourceHandler("/pages/*.html").addResourceLocations("/build/pages/");
-        registry.addResourceHandler("/assets/**").addResourceLocations("/build/assets/");
-        registry.addResourceHandler("/src/**").addResourceLocations("/build/src/");
-        registry.addResourceHandler("/vendor/**").addResourceLocations("/build/vendor/");
-        registry.addResourceHandler("/templates-app.js").addResourceLocations("/build/");
-        registry.addResourceHandler("/templates-common.js").addResourceLocations("/build/");
+        registry.addResourceHandler("/*.html").addResourceLocations("/");
+        registry.addResourceHandler("/pages/*.html").addResourceLocations("/pages/");
+        registry.addResourceHandler("/assets/**").addResourceLocations("/assets/");
+        registry.addResourceHandler("/bower_components/**").addResourceLocations("/bower_components/");
 
-//        //prod
-//        registry.addResourceHandler("/*.html").addResourceLocations("/bin/");
-//        registry.addResourceHandler("/pages/*.html").addResourceLocations("/build/pages/");
-//        registry.addResourceHandler("/assets/**").addResourceLocations("/bin/assets/");
     }
 
     @Override

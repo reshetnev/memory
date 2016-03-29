@@ -36,6 +36,18 @@
   <dependencies>
 
     <dependency>
+      <groupId>org.thymeleaf</groupId>
+      <artifactId>thymeleaf-spring4</artifactId>
+      <version>2.1.4.RELEASE</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.thymeleaf.extras</groupId>
+      <artifactId>thymeleaf-extras-springsecurity4</artifactId>
+      <version>2.1.2.RELEASE</version>
+    </dependency>
+
+    <dependency>
         <groupId>com.google.guava</groupId>
         <artifactId>guava</artifactId>
         <version>${guava.ver}</version>
@@ -207,7 +219,7 @@
               <arguments>
                 <argument>install</argument>
               </arguments>
-              <workingDirectory>${basedir}/src/main/webapp</workingDirectory>
+              <workingDirectory>${basedir}</workingDirectory>
             </configuration>
             <goals>
               <goal>exec</goal>
@@ -221,21 +233,7 @@
               <arguments>
                 <argument>install</argument>
               </arguments>
-              <workingDirectory>${basedir}/src/main/webapp</workingDirectory>
-            </configuration>
-            <goals>
-              <goal>exec</goal>
-            </goals>
-          </execution>
-          <execution>
-            <id>exec-grunt</id>
-            <phase>process-resources</phase>
-            <configuration>
-              <executable>grunt</executable>
-              <arguments>  <!-- delete for prod -->
-                <argument>build</argument>  <!-- delete for prod -->
-              </arguments>  <!-- delete for prod -->
-              <workingDirectory>${basedir}/src/main/webapp</workingDirectory>
+              <workingDirectory>${basedir}</workingDirectory>
             </configuration>
             <goals>
               <goal>exec</goal>
@@ -245,7 +243,7 @@
       </plugin>
     </plugins>
 
-<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence 
+<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence
   on the Maven build itself. -->
     <pluginManagement>
         <plugins>
