@@ -18,39 +18,25 @@
         <script type="text/javascript" src="bower_components/underscore/underscore-min.js"></script>
         <script type="text/javascript" src="assets/js/app.js"></script>
         <script type="text/javascript" src="assets/js/codes/codes.controller.js"></script>
+        <script type="text/javascript" src="assets/js/login/login.controller.js"></script>
         <script type="text/javascript" src="assets/js/dataservice.js"></script>
         <script type="text/javascript" src="assets/js/filters.js"></script>
 
     </head>
-    <body ng-controller="codesCtrl as codes">
+    <body>
         <div class="container">
           <div class="main">
             <header></header>
             <nav>
                 <div>
-                    <a href="#/" class="btn btn-default btn-lg active">Home</a>
-                    <a href="#/login" class="btn btn-default btn-lg">Login</a>
-                    <a href="" ng-click="logout()" ng-show="authenticated" class="btn btn-default btn-lg">Logout</a>
-                    <!--a href="#/about" class="btn btn-default btn-lg">About</a-->
+                    <a ui-sref="home" class="btn btn-default btn-lg active">Home</a>
+                    <a ui-sref="login" class="btn btn-default btn-lg">Login</a>
+                    <a ui-sref="logout" ng-click="logout()" ng-show="authenticated" class="btn btn-default btn-lg">Logout</a>
+                    <a ui-sref="about" class="btn btn-default btn-lg">About</a>
                 </div>
             </nav>
-            <div class="searcher">
-                <input type="text" class="form-control input-lg" placeholder="Search..." ng-model="codes.searchText"/>
-            </div>
             <div class="row">
-                <div class="col-md-8">
-                    <div class="content" ng-show="authenticated">
-                        <h1>Result:</h1>
-                        <hr></hr>
-                        <div ng-repeat="code in codes.codesList | filter:codes.searchText">
-                            <div ng-bind-html="code.name | highlightFilter:codes.searchText"><!--{{code.name}}--></div>
-                            <div ng-bind-html="code.password | highlightFilter:codes.searchText"><!--{{code.password}}--></div>
-                            <div ng-bind-html="code.group.name | highlightFilter:codes.searchText"><!--{{code.group.name}}--></div>
-                            <div ng-bind-html="code.user.email | highlightFilter:codes.searchText"><!--{{code.user.email}}--></div>
-                            <hr></hr>
-                        </div>
-                    </div>
-                </div>
+                <div ui-view></div>
                 <div class="col-md-4">
                     <aside>
                         <a class="btn btn-default btn-lg btn-block active">All</a>

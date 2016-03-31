@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app.core', ['ngResource'])
+        .module('app.core')
         .factory('dataservice', dataservice);
 
     dataservice.$inject = ['$resource'];
@@ -10,7 +10,8 @@
     function dataservice($resource) {
 
         var service = {
-            account: account
+            account: account,
+            code: code
         };
 
         return service;
@@ -32,7 +33,7 @@
          * - `void` `delete(id)` — Delete the account with the specified ID.
          */
         function account() {
-            return $resource('/api/v1/users', {}, {
+            return $resource('/memory/api/v1/users', {}, {
                 get: {
                     method: 'GET',
                     isArray: true
@@ -42,7 +43,7 @@
                     params: {
                         login: '@login'
                     },
-                    url: '/api/v1/users/:login',
+                    url: '/memory/api/v1/users/:login',
                     ignoreLoadingBar: true
                 },
                 create: {
@@ -53,24 +54,31 @@
                     params: {
                         id: '@id'
                     },
-                    url: '/api/v1/users/:id'
+                    url: '/memory/api/v1/users/:id'
                 },
                 delete: {
                     method: 'DELETE',
                     params: {
                         id: '@id'
                     },
-                    url: '/api/v1/users/:id'
+                    url: '/memory/api/v1/users/:id'
                 },
                 current: {
                     method: 'GET',
-                    url: '/api/v1/users/principal',
+                    url: '/memory/api/v1/users/principal',
                     cache: true
                 }
             });
         }
 
-
+        function code() {
+            return $resource('/memory/api/v1/codes', {}, {
+                getCodes: {
+                    method: 'GET',
+                    isArray: true
+                },
+            });
+        }
 
     }
 })();
