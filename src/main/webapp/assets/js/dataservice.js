@@ -38,13 +38,19 @@
                     method: 'GET',
                     isArray: true
                 },
+                getById: {
+                    method: 'GET',
+                    params: {
+                        id: '@id'
+                    },
+                    url: '/memory/api/v1/users/:id',
+                },
                 getByLogin: {
                     method: 'GET',
                     params: {
                         login: '@login'
                     },
                     url: '/memory/api/v1/users/:login',
-                    ignoreLoadingBar: true
                 },
                 create: {
                     method: 'POST'
@@ -65,16 +71,19 @@
                 },
                 current: {
                     method: 'GET',
-                    url: '/memory/api/v1/users/principal',
+                    url: 'memory/api/v1/users/principal',
                     cache: true
                 }
             });
         }
 
         function code() {
-            return $resource('/memory/api/v1/codes', {}, {
+            return $resource('/memory/api/v1/:userId/codes', {}, {
                 getCodes: {
                     method: 'GET',
+                    params: {
+                        userId: '@userId'
+                    },
                     isArray: true
                 },
             });

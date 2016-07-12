@@ -8,19 +8,29 @@
     function CodesController($rootScope, dataservice) {
 
         /* jshint validthis: true */
-        $rootScope.authenticated = true;
         var vm = this;
-        vm.greeting = "Hello!!!";
+        vm.greeting = "Hello, " + $rootScope.userName + "!!!";
 
         function init() {
-            dataservice.code().getCodes().$promise
-                .then(function (data) {
-                    vm.codesList = data;
-                    console.log("REST for CODES is Ok");
+            //var email = "reshetnev1983@gmail.com";
+            console.log("user=" + $rootScope.userName);
+            var email = $rootScope.userName;
+            var principal = undefined;
+            dataservice.account().getByLogin({login: email}).$promise
+                .then(function(data) {
+                    principal = data;
+                    console.log("REST for CURRENT USER is Ok " + principal.name);
+                    dataservice.code().getCodes({userId: principal.id}).$promise
+                        .then(function (data) {
+                            vm.codesList = data;
+                            console.log("REST for CODES is Ok");
+                        })
+                        .catch(function () {
+                            console.log("REST Error for CODES");
+                        });
+                }).catch(function() {
+                    console.log("REST Error for CURRENT USER");
                 })
-                .catch(function () {
-                    console.log("REST Error for CODES");
-                });
         }
 
         vm.encrypt = function (psw) {

@@ -70,6 +70,25 @@ public class UserResource extends BaseResource {
         return user;
     }
 
+    @GET
+    @Path("/{login}")
+    @Produces({JSON_UTF_8})
+    @ApiOperation(value = "Get user by login", notes = "Returns user with given login")
+    @ApiResponses(value = {
+            @ApiResponse(code = ERROR_400, message = ERROR_400_MESSAGE),
+            @ApiResponse(code = ERROR_404, message = ERROR_404_MESSAGE),
+            @ApiResponse(code = ERROR_503, message = ERROR_503_MESSAGE)})
+    public User getUserByLogin(@PathParam("login") String login) throws Exception {
+
+        LOG.info("Getting user by login: [{}] " + login);
+
+        Preconditions.checkNotNull(login, "User id should not be null");
+
+        User user = userService.findByEmail(login);
+
+        return user;
+    }
+
     @POST
     @Produces({JSON_UTF_8})
     @ApiOperation(value = "Create user", notes = "Returns new user")
