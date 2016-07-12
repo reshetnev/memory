@@ -15,7 +15,7 @@ public class SwaggerInitializer implements ServletContextListener {
         BeanConfig config = new BeanConfig();
         config.setVersion("1.0.2");
         config.setResourcePackage("com.epam.reshetnev.memory.rest.resource");
-        config.setBasePath("http://localhost:7001/memory/api");
+        config.setBasePath("http://localhost:8080/memory/api");
         config.setScan(true);
 
     }

@@ -22,6 +22,7 @@
 /src/main/webapp/vendor/angular-route
 /src/main/webapp/vendor/angular-resource
 /.idea
+/*.iml
 /src/main/webapp/vendor/crypto-js
 /src/main/webapp/vendor/underscore
 /*.iml

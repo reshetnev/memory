@@ -38,7 +38,7 @@ public class UserServiceImpl implements UserService {
 
         User savedUser = userRepository.save(user);
 
-        LOG.info("New group: [{}] successfully created " + savedUser.toString());
+        LOG.info("New user: [{}] successfully created " + savedUser.toString());
 
         return savedUser;
     }

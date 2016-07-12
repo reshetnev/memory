@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html ng-app="app">
+    <head>
+        <meta charset="utf-8">
+        <title>CodeMemo</title>
+
+        <!-- font awesome from BootstrapCDN -->
+        <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+
+        <!-- compiled CSS --><% styles.forEach( function ( file ) { %>
+        <link rel="stylesheet" type="text/css" href="<%= file %>" /><% }); %>
+
+        <!-- compiled JavaScript --><% scripts.forEach( function ( file ) { %>
+        <script type="text/javascript" src="<%= file %>"></script><% }); %>
+
+        <!-- it's stupid to have to load it here, but this is for the +1 button -->
+        <script type="text/javascript" src="https://apis.google.com/js/plusone.js">
+          { "parsetags": "explicit" }
+        </script>
+    </head>
+    <body ng-controller="codesCtrl as codes">
+        <div class="container">
+          <div class="main">
+            <header></header>
+            <nav>
+                <div>
+                    <a href="#/" class="btn btn-default btn-lg active">Home</a>
+                    <a href="#/login" class="btn btn-default btn-lg">Login</a>
+                    <a href="" ng-click="logout()" ng-show="authenticated" class="btn btn-default btn-lg">Logout</a>
+                    <!--a href="#/about" class="btn btn-default btn-lg">About</a-->
+                </div>
+            </nav>
+            <div class="searcher">
+                <input type="text" class="form-control input-lg" placeholder="Search..." ng-model="codes.searchText"/>
+            </div>
+            <div class="col-md-12" ng-view></div>
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="content" ng-show="authenticated">
+                        <h1>Result:</h1>
+                        <hr></hr>
+                        <div ng-repeat="code in codes.codesList | filter:codes.searchText">
+                            <div ng-bind-html="code.name | highlightFilter:codes.searchText"><!--{{code.name}}--></div>
+                            <div ng-bind-html="codes.decrypt('U2FsdGVkX1+YpvMCSJA8EtUhbbcDxqSr0GEsCERZHAM=') | highlightFilter:codes.searchText"><!--{{code.password}}--></div>
+                            <div ng-bind-html="code.group.name | highlightFilter:codes.searchText"><!--{{code.group.name}}--></div>
+                            <div ng-bind-html="code.user.email | highlightFilter:codes.searchText"><!--{{code.user.email}}--></div>
+                            <hr></hr>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <aside>
+                        <a class="btn btn-default btn-lg btn-block active">All</a>
+                        <a class="btn btn-default btn-lg btn-block">Mobile phone</a>
+                        <a class="btn btn-default btn-lg btn-block">Bank Cards</a>
+                        <a class="btn btn-default btn-lg btn-block">Email</a>
+                        <a class="btn btn-default btn-lg btn-block">Skype</a>
+                    </aside>
+                </div>
+            </div>
+          </div>
+        </div>
+        <footer></footer>
+    </body>
+</html>
