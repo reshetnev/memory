@@ -41,7 +41,7 @@
                         <hr></hr>
                         <div ng-repeat="code in codes.codesList | filter:codes.searchText">
                             <div ng-bind-html="code.name | highlightFilter:codes.searchText"><!--{{code.name}}--></div>
-                            <div ng-bind-html="code.password | highlightFilter:codes.searchText"><!--{{code.password}}--></div>
+                            <div ng-bind-html="codes.decrypt('U2FsdGVkX1+YpvMCSJA8EtUhbbcDxqSr0GEsCERZHAM=') | highlightFilter:codes.searchText"><!--{{code.password}}--></div>
                             <div ng-bind-html="code.group.name | highlightFilter:codes.searchText"><!--{{code.group.name}}--></div>
                             <div ng-bind-html="code.user.email | highlightFilter:codes.searchText"><!--{{code.user.email}}--></div>
                             <hr></hr>

@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app.core', ['ngResource'])
+        .module('app.core')
         .factory('dataservice', dataservice);
 
     dataservice.$inject = ['$resource'];
@@ -10,7 +10,8 @@
     function dataservice($resource) {
 
         var service = {
-            account: account
+            account: account,
+            code: code
         };
 
         return service;
@@ -32,18 +33,24 @@
          * - `void` `delete(id)` — Delete the account with the specified ID.
          */
         function account() {
-            return $resource('/api/v1/users', {}, {
+            return $resource('/memory/api/v1/users', {}, {
                 get: {
                     method: 'GET',
                     isArray: true
+                },
+                getById: {
+                    method: 'GET',
+                    params: {
+                        id: '@id'
+                    },
+                    url: '/memory/api/v1/users/:id',
                 },
                 getByLogin: {
                     method: 'GET',
                     params: {
                         login: '@login'
                     },
-                    url: '/api/v1/users/:login',
-                    ignoreLoadingBar: true
+                    url: '/memory/api/v1/users/:login',
                 },
                 create: {
                     method: 'POST'
@@ -53,34 +60,34 @@
                     params: {
                         id: '@id'
                     },
-                    url: '/api/v1/users/:id'
+                    url: '/memory/api/v1/users/:id'
                 },
                 delete: {
                     method: 'DELETE',
                     params: {
                         id: '@id'
                     },
-                    url: '/api/v1/users/:id'
+                    url: '/memory/api/v1/users/:id'
                 },
                 current: {
                     method: 'GET',
-                    url: '/api/v1/users/principal',
+                    url: 'memory/api/v1/users/principal',
                     cache: true
                 }
-//                ,
-//                currentId: {
-//                    method: 'GET',
-//                    url: '/api/v1/users/principalid'
-//                },
-//                managers: {
-//                    method: 'GET',
-//                    url: '/erms/rest/management/managers',
-//                    isArray: true
-//                }
             });
         }
 
-
+        function code() {
+            return $resource('/memory/api/v1/:userId/codes', {}, {
+                getCodes: {
+                    method: 'GET',
+                    params: {
+                        userId: '@userId'
+                    },
+                    isArray: true
+                },
+            });
+        }
 
     }
 })();

@@ -23,5 +23,14 @@
 /src/main/webapp/vendor/angular-resource
 /.idea
 /*.iml
-/node_modules
-/src/main/webapp/bower_components
+/src/main/webapp/vendor/crypto-js
+/src/main/webapp/vendor/underscore
+/*.iml
+/node_modules/grunt
+/src/main/webapp/bower_components/angular-ui-router
+/src/main/webapp/bower_components/angular
+/src/main/webapp/bower_components/bootstrap
+/src/main/webapp/bower_components/cryptojslib
+/src/main/webapp/bower_components/jquery
+/src/main/webapp/bower_components/underscore
+/src/main/webapp/bower_components/angular-resource

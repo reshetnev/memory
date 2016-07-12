@@ -1,6 +1,7 @@
 package com.epam.reshetnev.memory.rest.resource;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -28,8 +29,8 @@ import com.wordnik.swagger.annotations.ApiResponses;
  */
 
 @Component
-@Path("/v1/codes")
-@Api(value = "/v1/codes", description = "Memory codes")
+@Path("/v1/{userId : (\\d+) }/codes")
+@Api(value = "/v1/{userId}/codes", description = "Memory codes")
 public class CodeResource extends BaseResource {
 
     private static final Logger LOG = Logger.getLogger(CodeResource.class);
@@ -44,9 +45,13 @@ public class CodeResource extends BaseResource {
             @ApiResponse(code = ERROR_400, message = ERROR_400_MESSAGE),
             @ApiResponse(code = ERROR_404, message = ERROR_404_MESSAGE),
             @ApiResponse(code = ERROR_503, message = ERROR_503_MESSAGE)})
-    public List<Code> getAllCodes() throws Exception {
+    public List<Code> getAllCodes(@PathParam("userId") Integer userId) throws Exception {
 
-        List<Code> codes = codeService.getAll();
+        List<Code> codes = codeService
+                .getAll()
+                .stream()
+                .filter(code -> code.getUser().getId().equals(userId))
+                .collect(Collectors.toList());
 
         return codes;
     }
