@@ -1,0 +1,17 @@
+<div class="col-md-8">
+    <div class="searcher">
+        <input type="text" class="form-control input-lg" placeholder="Search..." ng-model="codesCtrl.searchText"/>
+    </div>
+	<div class="content" ng-show="authenticated">
+        <h1>{{codesCtrl.greeting}}</h1>
+		<h1>Result:</h1>
+		<hr></hr>
+		<div ng-repeat="code in codesCtrl.codesList | filter:codesCtrl.searchText">
+			<div ng-bind-html="code.name | highlightFilter:codesCtrl.searchText"><!--{{code.name}}--></div>
+			<div ng-bind-html="code.password | highlightFilter:codesCtrl.searchText"><!--{{code.password}}--></div>
+			<div ng-bind-html="code.group.name | highlightFilter:codesCtrl.searchText"><!--{{code.group.name}}--></div>
+			<div ng-bind-html="code.user.email | highlightFilter:codesCtrl.searchText"><!--{{code.user.email}}--></div>
+			<hr></hr>
+		</div>
+	</div>
+</div>
